@@ -2,6 +2,7 @@ package cat.udl.eps.softarch.demo.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -11,8 +12,9 @@ public class Batch {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private int amount;
-    private String location;
-    private LocalDate date;
+    private long latitude;
+    private long longitude;
+    private ZonedDateTime date;
 
     /*
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
