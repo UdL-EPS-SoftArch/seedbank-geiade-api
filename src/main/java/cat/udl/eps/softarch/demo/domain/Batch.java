@@ -1,10 +1,7 @@
 package cat.udl.eps.softarch.demo.domain;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.ZonedDateTime;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 public class Batch {
