@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "Take")
@@ -17,4 +18,7 @@ import javax.persistence.Table;
 public class Take extends Batch {
     @Id
     private Long id;
+    private ZonedDateTime lastUpdate;
+
+
 }
