@@ -11,7 +11,7 @@ import javax.persistence.Id;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class AdminEntity extends User {
+public class Admin extends User {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private int id;
