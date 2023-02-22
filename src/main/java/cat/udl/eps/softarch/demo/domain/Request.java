@@ -9,7 +9,6 @@ import javax.persistence.*;
 import java.time.ZonedDateTime;
 
 @Entity
-@Table(name = "Request")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
