@@ -10,7 +10,6 @@ import javax.persistence.Table;
 import java.time.ZonedDateTime;
 
 @Entity
-@Table(name = "Take")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
