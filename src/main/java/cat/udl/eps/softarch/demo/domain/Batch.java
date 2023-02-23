@@ -14,6 +14,7 @@ import java.time.ZonedDateTime;
 public class Batch {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
     private long id;
     private int amount = -1;
     private long latitude;
@@ -21,7 +22,7 @@ public class Batch {
     private ZonedDateTime date;
 
     /*
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "batch_id")
     private List<Seed> seeds;
     */
