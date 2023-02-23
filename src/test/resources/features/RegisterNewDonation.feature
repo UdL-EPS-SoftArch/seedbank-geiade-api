@@ -6,3 +6,4 @@ Feature: Register New Donation
   Scenario: Register new donation
     When I create a new donation
     Then The status is "Pending"
+    #And There is a Donor

@@ -19,9 +19,9 @@ public class Donation extends Batch{
     @NotNull
     @ManyToOne
     private Donor donor;
-    @Id
+    /*@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int id;*/
     @NotNull
     private DonationStatus donationStatus = DonationStatus.PENDING;
 }
