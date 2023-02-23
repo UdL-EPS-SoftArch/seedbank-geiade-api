@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.persistence.*;
 
@@ -17,5 +18,10 @@ import javax.persistence.*;
 public class Donation extends Batch{
     @NotNull
     @ManyToOne
-    private Donor donor;
+    private Donor by;
+
+    @Nullable
+    @OneToOne
+    private Take takenBy;
+
 }
