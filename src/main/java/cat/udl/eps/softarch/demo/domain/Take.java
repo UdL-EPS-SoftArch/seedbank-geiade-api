@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.time.ZonedDateTime;
 
 @Entity
@@ -17,6 +17,7 @@ public class Take extends Batch {
     @Id
     private Long id;
     private ZonedDateTime lastUpdate;
+    
 //    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @Column(nullable = false)
 //    private Propagator by;
