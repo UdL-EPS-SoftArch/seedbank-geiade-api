@@ -18,5 +18,5 @@ public class Request extends Batch {
     private Long id;
     private ZonedDateTime lastUpdate;
     @OneToOne
-    private Take take;
+    private Take fulfilledBy;
 }
