@@ -15,10 +15,10 @@ public class Batch {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private long id;
+    private Long id;
     private int amount = -1;
-    private long latitude;
-    private long longitude;
+    private Long latitude;
+    private Long longitude;
     private ZonedDateTime date;
 
     /*
