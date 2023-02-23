@@ -13,10 +13,10 @@ import java.time.ZonedDateTime;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Take extends Batch {
+public class Request extends Batch {
     @Id
     private Long id;
     private ZonedDateTime lastUpdate;
     @OneToOne
-    private Request request;
+    private Take take;
 }
