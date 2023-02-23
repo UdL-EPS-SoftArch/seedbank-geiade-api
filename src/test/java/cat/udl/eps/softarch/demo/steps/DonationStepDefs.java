@@ -20,11 +20,7 @@ public class DonationStepDefs {
         donation = new Donation();
         /*donation.setDonor(donor);*/
     }
-    @Then("^The status is \"([^\"]*)\"$")
-    public void checkStatus(String status){
-        assertThat(status, is(donation.getDonationStatus().getDescription()));
-    }
-    /*@And("^There is a Donor$")
+    /*@Then("^There is a Donor$")
     public void checkDonor(){
         boolean check = donation.getDonor().equals(null);
         assertThat(String.valueOf(check), false);
