@@ -11,10 +11,4 @@ import javax.persistence.Table;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
-@AllArgsConstructor
-public class Propagator extends User {
-    @Id
-    private Long id;
-
-}
+public class Propagator extends User {}
