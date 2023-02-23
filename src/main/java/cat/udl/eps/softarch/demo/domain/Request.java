@@ -16,6 +16,7 @@ import java.time.ZonedDateTime;
 public class Request extends Batch {
     @Id
     private Long id;
-
     private ZonedDateTime lastUpdate;
+    @OneToOne
+    private Take take;
 }
