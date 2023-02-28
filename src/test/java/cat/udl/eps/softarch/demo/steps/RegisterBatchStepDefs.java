@@ -1,4 +1,4 @@
-package cat.udl.eps.softarch.demo.steps;
+/*package cat.udl.eps.softarch.demo.steps;
 
 import cat.udl.eps.softarch.demo.domain.Batch;
 import io.cucumber.java.en.Then;
@@ -18,3 +18,7 @@ public class RegisterBatchStepDefs {
         assertThat(batch.getAmount(), is(-1));
     }
 }
+
+
+Commented test, as it's not complete, will be done later
+ */
