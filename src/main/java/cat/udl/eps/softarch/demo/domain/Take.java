@@ -17,9 +17,7 @@ public class Take extends Batch {
     @Id
     private Long id;
     private ZonedDateTime lastUpdate;
-    
-//    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @Column(nullable = false)
+
 //    private Propagator by;
 
 }
