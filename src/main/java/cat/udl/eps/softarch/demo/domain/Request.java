@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
@@ -20,5 +21,6 @@ public class Request extends Batch {
     private ZonedDateTime lastUpdate;
 
     @OneToOne
+    @Nullable
     private Take fulfilledBy;
 }
