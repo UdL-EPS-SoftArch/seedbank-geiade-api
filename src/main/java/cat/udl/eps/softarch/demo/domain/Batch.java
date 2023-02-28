@@ -22,8 +22,6 @@ public class Batch {
     private ZonedDateTime date;
 
     /*
-    @ManyToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "batch_id")
     private List<Seed> seeds;
     */
 }
