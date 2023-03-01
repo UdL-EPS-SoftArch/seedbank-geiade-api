@@ -5,7 +5,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 
 @Entity
@@ -14,10 +15,10 @@ import java.time.ZonedDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Take extends Batch {
-    @Id
-    private Long id;
+
     private ZonedDateTime lastUpdate;
 
-//    private Propagator by;
-
+    @NotNull
+    @ManyToOne
+    private Propagator by;
 }
