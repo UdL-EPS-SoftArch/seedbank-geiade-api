@@ -6,21 +6,25 @@ Feature: Create Take
   Background:
     Given There is a registered user with username "propagator" and password "password" and email "propagator@sample.app"
 
-  Scenario: There is a take
-    Given I login as "propagator" with password "password"
+  Scenario: Create a new take
+    Given I can login with username "propagator" and password "password"
     And The response code is 200
-    When a propagator
+    And There is a valid Propagator
+    And There is a valid Take
+    When I create a new valid Take
     Then The response code is 201
+    And There is 1 take created
 
-  Scenario: Any batch has been taken by a propagator
-    Given I login as "propagator" with password "password"
-    And any batch has been taken
-    When I take "0" batches
-    Then The response code is 201
+  Scenario: Create a new Take without a propagator
+    Given I can login with username "propagator" and password "password"
+    And The response code is 200
+    And There is a valid Take
+    But There is no Propagator
+    When I create a new take without a propagator
+    Then The response code is 400
+    And There is 0 take created
 
-  Scenario: Any batch has been taken by a propagator
-    Given I login as "propagator" with password "password"
-    And any batch has been taken
-    When I take "0" batches
-    Then The response code is 201
+
+
+
 
