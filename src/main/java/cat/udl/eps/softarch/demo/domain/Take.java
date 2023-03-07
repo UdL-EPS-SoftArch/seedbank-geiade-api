@@ -21,4 +21,6 @@ public class Take extends Batch {
     @NotNull
     @ManyToOne
     private Propagator by;
+
+
 }

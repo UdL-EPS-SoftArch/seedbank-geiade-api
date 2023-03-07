@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 
 @Entity
@@ -15,10 +16,12 @@ import java.time.ZonedDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Request extends Batch {
-    @Id
-    private Long id;
 
     private ZonedDateTime lastUpdate;
+
+    @NotNull
+    @ManyToOne
+    private Propagator by;
 
     @OneToOne
     @Nullable
