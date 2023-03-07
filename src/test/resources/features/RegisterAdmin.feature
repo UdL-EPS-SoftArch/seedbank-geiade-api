@@ -43,3 +43,10 @@ Feature: Register Admin
     Then The response code is 400
     And The error message is "must be a well-formed email address"
     And It has not been created a admin with username "admin"
+
+  Scenario: Register admin with password shorter than 8 characters
+    Given I'm not logged in
+    When I register a new admin with username "admin", email "admin@sample.app" and password "pass"
+    Then The response code is 400
+    And The error message is "length must be between 8 and 256"
+    And It has not been created a admin with username "admin"
