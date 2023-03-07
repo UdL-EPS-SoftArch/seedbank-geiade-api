@@ -50,3 +50,10 @@ Feature: Register Admin
     Then The response code is 400
     And The error message is "length must be between 8 and 256"
     And It has not been created a admin with username "admin"
+
+  Scenario: Register admin with an existing email
+    Given There is a registered admin with username "admin" and password "password" and email "admin@sample.app"
+    And I'm not logged in
+    When I register a new admin with username "admin2", email "admin@sample.app" and password "password2"
+    Then The response code is 409
+    And I can login admin with username "admin" and password "password"
