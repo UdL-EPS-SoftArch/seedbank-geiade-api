@@ -44,6 +44,19 @@ public class RegisterDonorStepDefs {
     }
   }
 
+  @And("^I can login donor with username \"([^\"]*)\" and password \"([^\"]*)\"$")
+  public void iCanLoginDonorWithUsernameAndPassword(String username, String password) throws Throwable {
+    AuthenticationStepDefs.currentUsername = username;
+    AuthenticationStepDefs.currentPassword = password;
+
+    stepDefs.result = stepDefs.mockMvc.perform(
+        get("/identity", username)
+            .accept(MediaType.APPLICATION_JSON)
+            .with(AuthenticationStepDefs.authenticate()))
+        .andDo(print())
+        .andExpect(status().isOk());
+  }
+
   @And("^I cannot login donor with username \"([^\"]*)\" and password \"([^\"]*)\"$")
   public void iCannotLoginDonorWithUsernameAndPassword(String username, String password) throws Throwable {
     AuthenticationStepDefs.currentUsername = username;
