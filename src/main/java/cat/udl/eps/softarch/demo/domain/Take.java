@@ -1,5 +1,6 @@
 package cat.udl.eps.softarch.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,7 +18,6 @@ import java.time.ZonedDateTime;
 public class Take extends Batch {
 
     private ZonedDateTime lastUpdate;
-
     @NotNull
     @ManyToOne
     private Propagator by;

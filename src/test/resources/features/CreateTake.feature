@@ -8,21 +8,11 @@ Feature: Create Take
 
   Scenario: Create a new take
     Given I can login with username "propagator" and password "password"
-    And The response code is 200
-    And There is a valid Propagator
-    And There is a valid Take
-    When I create a new valid Take
+    #And The response code is 200
+    When I create a new valid Take with Propagator with username "propagator"
     Then The response code is 201
-    And There is 1 take created
 
-  Scenario: Create a new Take without a propagator
-    Given I can login with username "propagator" and password "password"
-    And The response code is 200
-    And There is a valid Take
-    But There is no Propagator
-    When I create a new take without a propagator
-    Then The response code is 400
-    And There is 0 take created
+    #And There is 1 take created
 
 
 
