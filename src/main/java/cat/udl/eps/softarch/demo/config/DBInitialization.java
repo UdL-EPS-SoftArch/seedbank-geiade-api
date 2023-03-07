@@ -31,16 +31,6 @@ public class DBInitialization {
 
     @PostConstruct
     public void initializeDatabase() {
-        // Default donor
-        if (!donorRepository.existsById("donor")) {
-            Donor donor = new Donor();
-            donor.setEmail("donor@sample.app");
-            donor.setUsername("donor");
-            donor.setPassword(defaultPassword);
-            donor.encodePassword();
-            donorRepository.save(donor);
-        }
-
         // Default propagator
         if (!propagatorRepository.existsById("propagator")) {
             Propagator propagator = new Propagator();
