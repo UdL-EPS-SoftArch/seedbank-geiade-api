@@ -19,8 +19,11 @@ public class Take extends Batch {
 
     private ZonedDateTime lastUpdate;
     @NotNull
+    @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     private Propagator by;
+
+
 
 
 }
