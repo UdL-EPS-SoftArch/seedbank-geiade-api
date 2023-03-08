@@ -39,11 +39,10 @@ public class RequestDefs {
             Request request = new Request();
             request.setBy(propagator.get());
             request.setLastUpdate(ZonedDateTime.now());
-            requestRepository.save(request);
             stepDefs.result = stepDefs.mockMvc.perform(
                             post("/requests")
                                     .contentType(MediaType.APPLICATION_JSON)
-                                    .content(stepDefs.mapper.writeValueAsString(requestRepository.findById(request.getId())))
+                                    .content(stepDefs.mapper.writeValueAsString(request))
                                     .accept(MediaType.APPLICATION_JSON)
                                     .with(AuthenticationStepDefs.authenticate()))
                     .andDo(print());

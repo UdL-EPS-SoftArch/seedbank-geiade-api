@@ -1,5 +1,6 @@
 package cat.udl.eps.softarch.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,10 +22,12 @@ public class Request extends Batch {
 
     @NotNull
     @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
     private Propagator by;
 
     @OneToOne
     @Nullable
+    @JsonIdentityReference(alwaysAsId = true)
     private Take fulfilledBy;
 
 
