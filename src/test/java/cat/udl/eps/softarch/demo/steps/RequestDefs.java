@@ -9,6 +9,7 @@ import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
@@ -38,6 +39,9 @@ public class RequestDefs {
         if (propagator.isPresent()) {
             Request request = new Request();
             request.setBy(propagator.get());
+            request.setAmount(1);
+            request.setWeight(BigDecimal.ONE);
+            request.setLocation("Lleida");
             request.setLastUpdate(ZonedDateTime.now());
             stepDefs.result = stepDefs.mockMvc.perform(
                             post("/requests")
