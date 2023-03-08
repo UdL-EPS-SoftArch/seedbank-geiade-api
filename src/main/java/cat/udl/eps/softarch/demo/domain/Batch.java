@@ -35,8 +35,9 @@ public class Batch {
     private String location;
 
     private ZonedDateTime date = ZonedDateTime.now();
+    
+    @NotNull
+    @ManyToOne
+    private Seed seeds;
 
-    /*
-    private List<Seed> seeds;
-    */
 }
