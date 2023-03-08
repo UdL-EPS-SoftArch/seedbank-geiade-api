@@ -9,6 +9,8 @@ Feature: Register Admin
     When I register a new admin with username "admin", email "admin@sample.app" and password "password"
     Then The response code is 201
     And It has been created a admin with username "admin" and email "admin@sample.app", the password is not returned
+    And I can login admin with username "admin" and password "password"
+
 
   Scenario: Register admin existing username
     Given There is a registered admin with username "admin" and password "existing" and email "admin@sample.app"
