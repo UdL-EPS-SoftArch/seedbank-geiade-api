@@ -1,5 +1,6 @@
 package cat.udl.eps.softarch.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -17,10 +18,12 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = false)
 public class Donation extends Batch{
     @NotNull
+    @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     private Donor by;
 
     @Nullable
+    @JsonIdentityReference(alwaysAsId = true)
     @OneToOne
     private Take takenBy;
 
