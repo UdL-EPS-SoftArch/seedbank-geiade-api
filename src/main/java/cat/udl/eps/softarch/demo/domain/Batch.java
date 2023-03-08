@@ -20,8 +20,8 @@ import java.time.ZonedDateTime;
 public class Batch {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private Long id;
+
     @NotNull
     @Min(value = 1, message = "There must be one or more seeds")
     private Integer amount;
