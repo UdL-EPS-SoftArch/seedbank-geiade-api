@@ -4,11 +4,12 @@ Feature: Create Take
   I want to be able to take
 
   Background:
-    Given There is a registered user with username "propagator"
+    Given There is a registered propagator with username "propagator"
 
-  Scenario: Create a new take
+  Scenario: Create a new take successfully.
     Given I can login with username "propagator" and password "password"
-    When I create a new valid Take with Propagator with username "propagator"
+    And The response code is 200
+    When I create a new valid Take with Propagator
     Then The response code is 201
 
 

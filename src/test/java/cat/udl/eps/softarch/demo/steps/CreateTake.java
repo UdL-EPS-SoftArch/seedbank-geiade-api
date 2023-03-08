@@ -4,13 +4,11 @@ import cat.udl.eps.softarch.demo.domain.Propagator;
 import cat.udl.eps.softarch.demo.domain.Take;
 import cat.udl.eps.softarch.demo.repository.PropagatorRepository;
 import cat.udl.eps.softarch.demo.repository.TakeRepository;
-import cat.udl.eps.softarch.demo.repository.UserRepository;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.But;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.parameters.P;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
@@ -27,36 +25,47 @@ public class CreateTake {
     @Autowired
     private StepDefs stepDefs;
 
-
-    @Given("^There is a registered user with username \"([^\"]*)\"$")
-    public void thereIsARegisteredUserWithUsernameAndPasswordAndEmail(String username) throws RuntimeException {
+    @Given("^There is a registered propagator with username \"([^\"]*)\"$")
+    public void thereIsARegisteredUserWithUsername(String username) throws RuntimeException {
         if (!propagatorRepository.existsById(username)) {
             throw new RuntimeException("Unregistered propagator");
         }
     }
 
-    @When("^I create a new valid Take with Propagator with username \"([^\"]*)\"$")
-    public void createTake(String username) throws Exception {
-        Optional<Propagator> propagator = propagatorRepository.findById(username);
-        if (propagator.isPresent()) {
+    @When("^I create a new valid Take with Propagator$")
+    public void createTake() throws Exception {
             Take take = createValidTake();
-            take.setBy(propagator.get());
-            takeRepository.save(take);
-            takeRepository.findAll();
             stepDefs.result = stepDefs.mockMvc.perform(
                             post("/takes")
-                                    .contentType(MediaType.APPLICATION_JSON)
-                                    .content(stepDefs.mapper.writeValueAsString(takeRepository.findById(take.getId())))
+                                    .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                    .characterEncoding("utf-8")
+                                    .content(stepDefs.mapper.writeValueAsString(take))
                                     .accept(MediaType.APPLICATION_JSON)
                                     .with(AuthenticationStepDefs.authenticate()))
                     .andDo(print());
-        }
     }
+
+    /*
+    @And("There is 1 take created")
+    public void thereisAtakeCreated() throws Exception{
+        Assert.assertEquals(1, takeRepository.count());
+    }
+     */
     private Take createValidTake(){
         Take take = new Take();
         take.setWeight(BigDecimal.TEN);
+        take.setAmount(10);
         take.setLocation("Lleida");
         take.setDate(ZonedDateTime.now());
+        take.setBy(createValidPropagator());
         return take;
+    }
+    private Propagator createValidPropagator() {
+        Propagator propagator = new Propagator();
+        propagator.setUsername("propagator");
+        propagator.setEmail("propagator@sample.app");
+        propagator.setPassword("password");
+        propagator.encodePassword();
+        return propagator;
     }
 }
