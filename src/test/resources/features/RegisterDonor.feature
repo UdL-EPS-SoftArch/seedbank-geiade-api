@@ -9,6 +9,7 @@ Feature: Register Donor
     When I register a new donor with username "donor", email "donor@sample.app" and password "password"
     Then The response code is 201
     And It has been created a donor with username "donor" and email "donor@sample.app", the password is not returned
+    And I can login donor with username "donor" and password "password"
 
   Scenario: Register existing username
     Given There is a registered donor with username "donor" and password "existing" and email "donor@sample.app"
