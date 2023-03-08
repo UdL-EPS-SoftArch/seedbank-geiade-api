@@ -12,6 +12,14 @@ Feature: Create Take
     When I create a new valid Take with Propagator
     Then The response code is 201
 
+  Scenario: Create new Take but not logged in.
+    Given I'm not logged in
+    When I create a new valid Take with Propagator
+    Then The response code is 401
+
+
+
+
 
 
 
