@@ -4,7 +4,6 @@ import cat.udl.eps.softarch.demo.domain.Propagator;
 import cat.udl.eps.softarch.demo.domain.Take;
 import cat.udl.eps.softarch.demo.repository.PropagatorRepository;
 import cat.udl.eps.softarch.demo.repository.TakeRepository;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
