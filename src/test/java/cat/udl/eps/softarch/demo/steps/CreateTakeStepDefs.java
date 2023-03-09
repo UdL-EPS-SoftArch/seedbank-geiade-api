@@ -19,7 +19,7 @@ import java.util.List;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
-public class CreateTake {
+public class CreateTakeStepDefs {
     @Autowired
     private PropagatorRepository propagatorRepository;
     @Autowired
@@ -27,12 +27,15 @@ public class CreateTake {
     @Autowired
     private StepDefs stepDefs;
 
+    /*
     @Given("^There is a registered propagator with username \"([^\"]*)\"$")
     public void thereIsARegisteredUserWithUsername(String username) throws RuntimeException {
         if (!propagatorRepository.existsById(username)) {
             throw new RuntimeException("Unregistered propagator");
         }
     }
+
+     */
 
     @When("^I create a new valid Take with Propagator$")
     public void createTake() throws Exception {

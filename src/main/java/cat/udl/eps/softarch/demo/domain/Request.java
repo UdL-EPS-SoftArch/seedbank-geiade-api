@@ -7,9 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 
 @Entity
@@ -30,6 +28,4 @@ public class Request extends Batch {
     @Nullable
     @JsonIdentityReference(alwaysAsId = true)
     private Take fulfilledBy;
-
-
 }
