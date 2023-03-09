@@ -2,6 +2,8 @@ package cat.udl.eps.softarch.demo.steps;
 
 import cat.udl.eps.softarch.demo.domain.Donation;
 import cat.udl.eps.softarch.demo.domain.Donor;
+import cat.udl.eps.softarch.demo.domain.Propagator;
+import cat.udl.eps.softarch.demo.domain.Take;
 import cat.udl.eps.softarch.demo.repository.DonationRepository;
 import cat.udl.eps.softarch.demo.repository.DonorRepository;
 import cat.udl.eps.softarch.demo.repository.TakeRepository;
@@ -56,6 +58,18 @@ public class CreateDonationStepDefs {
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
     }
+    @When("^I create a donation with donor and take$")
+    public void createDonationWithDonorAndTake() throws Exception {
+        Donation donation = createValidDonationWithDonorAndTake();
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        post("/donations")
+                                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                .characterEncoding("utf-8")
+                                .content(stepDefs.mapper.writeValueAsString(donation))
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
+    }
 
 
     private Donation createValidDonation() {
@@ -83,5 +97,33 @@ public class CreateDonationStepDefs {
         donation.setDate(ZonedDateTime.now());
         donation.setLocation("Lleida");
         return donation;
+    }
+    private Take createValidTake(){
+        Take take = new Take();
+        take.setWeight(BigDecimal.TEN);
+        take.setAmount(10);
+        take.setLocation("Mollerussa");
+        take.setDate(ZonedDateTime.now());
+        take.setBy(createValidPropagator());
+        return take;
+    }
+    private Propagator createValidPropagator() {
+        Propagator propagator = new Propagator();
+        propagator.setUsername("propagator");
+        propagator.setEmail("propagator@sample.app");
+        propagator.setPassword("password");
+        propagator.encodePassword();
+        return propagator;
+    }
+    private Donation createValidDonationWithDonorAndTake() {
+        Donation donation = new Donation();
+        donation.setAmount(89);
+        donation.setWeight(new BigDecimal("11.34"));
+        donation.setDate(ZonedDateTime.now());
+        donation.setLocation("Lleida");
+        donation.setBy(createValidDonor());
+        donation.setTakenBy(createValidTake());
+        return donation;
+
     }
 }
