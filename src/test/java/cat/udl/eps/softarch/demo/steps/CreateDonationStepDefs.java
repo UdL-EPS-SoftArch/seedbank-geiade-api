@@ -44,6 +44,20 @@ public class CreateDonationStepDefs {
                 .andDo(print());
     }
 
+    @When("^I create a donation without donor$")
+    public void createDonationWithoutDonor() throws Exception {
+        Donation donation = createNotValidDonation();
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        post("/donations")
+                                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                .characterEncoding("utf-8")
+                                .content(stepDefs.mapper.writeValueAsString(donation))
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
+    }
+
+
     private Donation createValidDonation() {
         Donation donation = new Donation();
         donation.setAmount(89);
@@ -61,5 +75,13 @@ public class CreateDonationStepDefs {
         donor.setPassword("password");
         donor.encodePassword();
         return donor;
+    }
+    private Donation createNotValidDonation() {
+        Donation donation = new Donation();
+        donation.setAmount(89);
+        donation.setWeight(new BigDecimal("11.34"));
+        donation.setDate(ZonedDateTime.now());
+        donation.setLocation("Lleida");
+        return donation;
     }
 }
