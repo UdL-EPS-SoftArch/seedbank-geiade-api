@@ -9,3 +9,5 @@ Feature: Create Request
     Given I login as "propagator" with password "password"
     When I create a new request with propagator with username "propagator"
     Then The response code is 201
+
+  Scenario: Create
