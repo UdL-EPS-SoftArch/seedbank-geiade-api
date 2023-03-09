@@ -31,6 +31,7 @@ public class DBInitialization {
 
     @PostConstruct
     public void initializeDatabase() {
+
         // Default propagator
         if (!propagatorRepository.existsById("propagator")) {
             Propagator propagator = new Propagator();
