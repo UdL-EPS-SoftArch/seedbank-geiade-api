@@ -1,5 +1,9 @@
 package cat.udl.eps.softarch.demo.config;
+import cat.udl.eps.softarch.demo.domain.Donor;
+import cat.udl.eps.softarch.demo.domain.Propagator;
 import cat.udl.eps.softarch.demo.domain.User;
+import cat.udl.eps.softarch.demo.repository.DonorRepository;
+import cat.udl.eps.softarch.demo.repository.PropagatorRepository;
 import cat.udl.eps.softarch.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -12,34 +16,18 @@ public class DBInitialization {
     String defaultPassword;
     @Value("${spring.profiles.active:}")
     private String activeProfiles;
-    private final UserRepository userRepository;
-    private final DonorRepository donorRepository;
-
-    public DBInitialization(UserRepository userRepository, DonorRepository donorRepository) {
-    private final DonorRepository donorRepository;
-
-    private final PropagatorRepository propagatorRepository;
+    private UserRepository userRepository;
+    private DonorRepository donorRepository;
+    private PropagatorRepository propagatorRepository;
 
     public DBInitialization(UserRepository userRepository, DonorRepository donorRepository, PropagatorRepository propagatorRepository) {
-
         this.userRepository = userRepository;
-        this.donorRepository = donorRepository;
         this.donorRepository = donorRepository;
         this.propagatorRepository = propagatorRepository;
     }
 
     @PostConstruct
-    public void initializeDatabase() {
-        // Default donor
-        if (!donorRepository.existsById("donor")) {
-            Donor donor = new Donor();
-            donor.setEmail("donor@sample.app");
-            donor.setUsername("donor");
-            donor.setPassword(defaultPassword);
-            donor.encodePassword();
-            donorRepository.save(donor);
-        }
-
+    public void initializeDatabase () {
         // Default propagator
         if (!propagatorRepository.existsById("propagator")) {
             Propagator propagator = new Propagator();
