@@ -11,3 +11,9 @@ Feature: Create a Donation
     And The response code is 200
     When I create a new valid donation with donor
     Then The response code is 201
+
+  Scenario: Create a new donation with no donor
+    Given I can login with username "userdonor" and password "password"
+    And The response code is 200
+    When I create a donation without donor
+    Then The response code is 400
