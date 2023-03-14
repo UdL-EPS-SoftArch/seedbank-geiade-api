@@ -63,7 +63,7 @@ public class CreateTakeStepDefs {
 
     @When("I create an invalid take")
     public void CreateAnInvalidTake() throws Exception{
-        Take take = createInvalidTake("Lleida");
+        Take take = createInvalidTake("Brno");
         stepDefs.result = stepDefs.mockMvc.perform(
                         post("/takes")
                                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -88,11 +88,11 @@ public class CreateTakeStepDefs {
     private Take createInvalidTake(String location){
         Take take = new Take();
         take.setWeight(BigDecimal.TEN);
+        take.setLocation(location);
         take.setDate(ZonedDateTime.now());
         take.setBy(createValidPropagator());
         return take;
     }
-
 
     private Take createValidTake(String location){
         Take take = new Take();
