@@ -27,7 +27,3 @@ Feature: Create Take
 
 
 
-
-
-
-

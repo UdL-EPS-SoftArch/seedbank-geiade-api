@@ -6,10 +6,12 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
@@ -19,6 +21,7 @@ import java.time.ZonedDateTime;
 @AllArgsConstructor
 public class Batch {
     @GeneratedValue(strategy = GenerationType.AUTO)
+
     @Id
     private long id;
 
@@ -28,6 +31,7 @@ public class Batch {
 
     @NotNull
     @DecimalMin(value = "0", message = "Minim weight should be 0")
+
     private BigDecimal weight;
 
     @NotBlank
@@ -36,5 +40,4 @@ public class Batch {
 
     private ZonedDateTime date = ZonedDateTime.now();
 
-    //
 }
