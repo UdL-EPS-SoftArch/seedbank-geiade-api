@@ -27,16 +27,6 @@ public class CreateTakeStepDefs {
     @Autowired
     private StepDefs stepDefs;
 
-    /*
-    @Given("^There is a registered propagator with username \"([^\"]*)\"$")
-    public void thereIsARegisteredUserWithUsername(String username) throws RuntimeException {
-        if (!propagatorRepository.existsById(username)) {
-            throw new RuntimeException("Unregistered propagator");
-        }
-    }
-
-     */
-
     @When("^I create a new valid Take with Propagator$")
     public void createTake() throws Exception {
             Take take = createValidTake("Lleida");
@@ -50,12 +40,10 @@ public class CreateTakeStepDefs {
                     .andDo(print());
     }
 
-
     @Then("There is 1 take created$")
     public void thereIsOnetakeCreated() throws Exception{
         Assert.assertEquals(1, takeRepository.count());
     }
-
 
     @When("I create 5 takes")
     public void thereAreVariousTakesCreated() throws Exception{
@@ -106,4 +94,10 @@ public class CreateTakeStepDefs {
 
         return locations;
     }
+
+    @Then("There is 0 take created$")
+    public void thereIsNoTakeCreated() {
+        Assert.assertEquals(0, takeRepository.count());
+    }
 }
+
