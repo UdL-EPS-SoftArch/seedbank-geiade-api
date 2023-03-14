@@ -48,6 +48,7 @@ public class RequestDefs {
                                     .with(AuthenticationStepDefs.authenticate()))
                     .andDo(print());
     }
+
     private Request createValidRequest (){
         Request request = new Request();
         request.setBy(createValidPropagator());
@@ -84,5 +85,26 @@ public class RequestDefs {
         locations.add("Barcelona");
 
         return locations;
+    }
+    @When("^I create a new request without Take with propagator with username \"([^\"]*)\"$")
+    public void createNotValidRequest(String username) throws Exception {
+        Request request = createRequestWithoutTake();
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        post("/requests")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .characterEncoding("utf-8")
+                                .content(stepDefs.mapper.writeValueAsString(request))
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
+    }
+    private Request createRequestWithoutTake (){
+        Request request = new Request();
+        request.setBy(createValidPropagator());
+        request.setAmount(1);
+        request.setWeight(BigDecimal.ONE);
+        request.setLocation("Lleida");
+        request.setLastUpdate(ZonedDateTime.now());
+        return request;
     }
 }

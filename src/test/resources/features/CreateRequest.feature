@@ -10,4 +10,12 @@ Feature: Create Request
     When I create a new request with propagator with username "propagator"
     Then The response code is 201
 
-  Scenario: Create
+  Scenario: Create a new request without authentication
+    Given I'm not logged in
+    When I create a new request with propagator with username "propagator"
+    Then The response code is 401
+
+  Scenario: Create a new request without Take
+    Given I login as "propagator" with password "password"
+    When I create a new request without Take with propagator with username "propagator"
+    Then The response code is 201
