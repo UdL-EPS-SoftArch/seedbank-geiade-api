@@ -6,7 +6,6 @@ import lombok.Data;
 
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.jetbrains.annotations.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
