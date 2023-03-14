@@ -18,3 +18,12 @@ Feature: Register Propagator
     Then The response code is 409
     And I cannot login with username "propagator2" and password "newpassword"
 
+  Scenario: Register propagator when already authenticated
+    Given There is no registered propagator with username "propagator4"
+    And I'm not logged in
+    When I register a new propagator with username "propagator4", email "propagator4@sample.app" and password "password"
+    Given I can login with username "propagator4" and password "password"
+    Then The response code is 200
+    When I register a new propagator with username "propagator3", email "propagator3@sample.app" and password "password"
+    Then The response code is 403
+    And It has not been created a propagator with username "propagator3"
