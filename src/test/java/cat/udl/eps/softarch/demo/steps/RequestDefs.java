@@ -5,8 +5,10 @@ import cat.udl.eps.softarch.demo.domain.Request;
 import cat.udl.eps.softarch.demo.domain.Take;
 import cat.udl.eps.softarch.demo.repository.PropagatorRepository;
 import cat.udl.eps.softarch.demo.repository.RequestRepository;
+import cat.udl.eps.softarch.demo.repository.TakeRepository;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import net.bytebuddy.dynamic.DynamicType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
@@ -24,8 +26,7 @@ public class RequestDefs {
     @Autowired
     private StepDefs stepDefs;
     @Autowired
-    private RequestRepository requestRepository;
-
+    private TakeRepository takeRepository;
     @Autowired
     private PropagatorRepository propagatorRepository;
 
@@ -49,9 +50,10 @@ public class RequestDefs {
                     .andDo(print());
     }
 
-    private Request createValidRequest (){
+    private Request createValidRequest () throws Exception{
         Request request = new Request();
-        request.setBy(createValidPropagator());
+        Propagator propagator = createValidPropagator();
+        request.setBy(propagator);
         request.setAmount(1);
         request.setWeight(BigDecimal.ONE);
         request.setLocation("Lleida");
@@ -59,13 +61,18 @@ public class RequestDefs {
         request.setFulfilledBy(createValidTake("Lleida"));
         return request;
     }
-    private Take createValidTake(String location){
-        Take take = new Take();
-        take.setWeight(BigDecimal.TEN);
-        take.setAmount(10);
-        take.setLocation(location);
-        take.setDate(ZonedDateTime.now());
-        return take;
+    private Take createValidTake(String location) throws Exception{
+        Optional<Take> take1 = takeRepository.findByLocation(location);
+        if (take1.isEmpty()){
+            Take take = new Take();
+            take.setWeight(BigDecimal.TEN);
+            take.setAmount(10);
+            take.setLocation(location);
+            take.setDate(ZonedDateTime.now());
+            takeRepository.save(take);
+            return take;
+        }
+        return take1.get();
     }
     private Propagator createValidPropagator() {
         Propagator propagator = new Propagator();

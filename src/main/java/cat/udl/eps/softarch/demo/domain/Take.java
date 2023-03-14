@@ -18,5 +18,4 @@ public class Take extends Batch {
     private Long id;
     private ZonedDateTime lastUpdate;
 
-
 }
