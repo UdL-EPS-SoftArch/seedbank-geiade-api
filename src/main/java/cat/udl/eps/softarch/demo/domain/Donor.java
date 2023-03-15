@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 public class Donor extends User{
 
 }

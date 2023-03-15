@@ -21,7 +21,7 @@ public class Take extends Batch {
     @NotNull
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
-    private Propagator by;
+    private Propagator propagator;
 
 
 

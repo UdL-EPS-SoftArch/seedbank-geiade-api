@@ -16,18 +16,22 @@ public class DBInitialization {
     String defaultPassword;
     @Value("${spring.profiles.active:}")
     private String activeProfiles;
-    private UserRepository userRepository;
-    private DonorRepository donorRepository;
-    private PropagatorRepository propagatorRepository;
+    private final UserRepository userRepository;
+
+    private final DonorRepository donorRepository;
+
+    private final PropagatorRepository propagatorRepository;
 
     public DBInitialization(UserRepository userRepository, DonorRepository donorRepository, PropagatorRepository propagatorRepository) {
+
         this.userRepository = userRepository;
         this.donorRepository = donorRepository;
         this.propagatorRepository = propagatorRepository;
     }
 
     @PostConstruct
-    public void initializeDatabase () {
+    public void initializeDatabase() {
+
         // Default propagator
         if (!propagatorRepository.existsById("propagator")) {
             Propagator propagator = new Propagator();
@@ -47,17 +51,6 @@ public class DBInitialization {
             user.encodePassword();
             userRepository.save(user);
         }
-
-        // Default donor
-        if (!donorRepository.existsById("userdonor")) {
-            Donor donor = new Donor();
-            donor.setEmail("userdonor@sample.app");
-            donor.setUsername("userdonor");
-            donor.setPassword(defaultPassword);
-            donor.encodePassword();
-            donorRepository.save(donor);
-        }
-
         if (Arrays.asList(activeProfiles.split(",")).contains("test")) {
             // Testing instances
             if (!userRepository.existsById("test")) {

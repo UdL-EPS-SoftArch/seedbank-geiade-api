@@ -13,7 +13,7 @@ Feature: Create Take
     Then There is 1 take created
     And The response code is 201
 
-  Scenario: Create new Take but not logged in.
+  Scenario: Create new Take but not logged in
     Given I'm not logged in
     When I create a new valid Take with Propagator
     Then The response code is 401
@@ -25,9 +25,18 @@ Feature: Create Take
     Then There are 5 take created
     And The response code is 201
 
+  Scenario: Create new Take missing some attributes
+    Given I can login with username "propagator" and password "password"
+    And The response code is 200
+    When I create an invalid take
+    Then There is 0 take created
+    And The response code is 400
 
-
-
-
+  Scenario: Create new Take without user permissions
+    Given I can login with username "donor" and password "password"
+    And The response code is 200
+    When I create a new valid Take with Donor
+    Then There is 0 take created
+    And The response code is 403
 
 
