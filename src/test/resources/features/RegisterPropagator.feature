@@ -27,3 +27,11 @@ Feature: Register Propagator
     When I register a new propagator with username "propagator3", email "propagator3@sample.app" and password "password"
     Then The response code is 403
     And It has not been created a propagator with username "propagator3"
+
+  Scenario: Register new propagator with empty password
+    And I'm not logged in
+    When I register a new propagator with username "propagator4", email "propagator4@sample.app" and password ""
+    Then The response code is 400
+    And The error message is "must not be blank"
+    And It has not been created a propagator with username "propagator4"
+
