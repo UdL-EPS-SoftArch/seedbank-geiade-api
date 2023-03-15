@@ -24,4 +24,11 @@ Feature: Create a Donation
     When I create a donation with donor and take
     Then The response code is 201
 
+  Scenario: Create a new donation without attributes
+    Given I can login with username "userdonor" and password "password"
+    And The response code is 200
+    When I create a donation without attributes
+    Then The response code is 400
+
+
 

@@ -68,6 +68,19 @@ public class CreateDonationStepDefs {
                 .andDo(print());
     }
 
+    @When("^I create a donation without attributes$")
+    public void createInvalidDonationWithoutAttributes() throws Exception {
+        Donation donation = createDonationWithoutAttributes();
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        post("/donations")
+                                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                .characterEncoding("utf-8")
+                                .content(stepDefs.mapper.writeValueAsString(donation))
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
+    }
+
 
     private Donation createValidDonation() {
         Donation donation = new Donation();
@@ -121,6 +134,11 @@ public class CreateDonationStepDefs {
         donation.setBy(createValidDonor());
         donation.setTakenBy(createValidTake());
         return donation;
+    }
 
+    private Donation createDonationWithoutAttributes() {
+        Donation donation = new Donation();
+        donation.setBy(createValidDonor());
+        return donation;
     }
 }
