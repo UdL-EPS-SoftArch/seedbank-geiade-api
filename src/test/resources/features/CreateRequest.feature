@@ -25,4 +25,4 @@ Feature: Create Request
     When I create a new request with propagator with username "propagator"
     Then The response code is 201
     When I create a new request with propagator with username "propagator"
-    Then The response code is 400
+    Then The response code is 403
