@@ -37,7 +37,14 @@ Feature: Register Propagator
 
   Scenario: Register new propagator with empty email
     And I'm not logged in
-    When I register a new propagator with username "propagator5", email "" and password "password"
+    When I register a new propagator with username "propagator4", email "" and password "password"
     Then The response code is 400
     And The error message is "must not be blank"
-    And It has not been created a propagator with username "propagator5"
+    And It has not been created a propagator with username "propagator4"
+
+  Scenario: Register new propagator with invalid email
+    And I'm not logged in
+    When I register a new propagator with username "propagator4", email "prop.com" and password "password"
+    Then The response code is 400
+    And The error message is "must be a well-formed email address"
+    And It has not been created a propagator with username "propagator4"
