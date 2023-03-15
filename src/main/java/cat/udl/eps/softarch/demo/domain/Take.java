@@ -14,8 +14,6 @@ import java.time.ZonedDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Take extends Batch {
-    @Id
-    private Long id;
     private ZonedDateTime lastUpdate;
 
 }
