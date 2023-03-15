@@ -4,11 +4,9 @@ import cat.udl.eps.softarch.demo.domain.Propagator;
 import cat.udl.eps.softarch.demo.domain.Request;
 import cat.udl.eps.softarch.demo.domain.Take;
 import cat.udl.eps.softarch.demo.repository.PropagatorRepository;
-import cat.udl.eps.softarch.demo.repository.RequestRepository;
 import cat.udl.eps.softarch.demo.repository.TakeRepository;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import net.bytebuddy.dynamic.DynamicType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
@@ -22,7 +20,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 
-public class RequestDefs {
+public class CreateRequestDefs {
     @Autowired
     private StepDefs stepDefs;
     @Autowired
