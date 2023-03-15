@@ -35,3 +35,9 @@ Feature: Register Propagator
     And The error message is "must not be blank"
     And It has not been created a propagator with username "propagator4"
 
+  Scenario: Register new propagator with empty email
+    And I'm not logged in
+    When I register a new propagator with username "propagator5", email "" and password "password"
+    Then The response code is 400
+    And The error message is "must not be blank"
+    And It has not been created a propagator with username "propagator5"
