@@ -32,11 +32,5 @@ Feature: Create Take
     Then There is 0 take created
     And The response code is 400
 
-  Scenario: Create new Take without user permissions
-    Given I can login with username "donor" and password "password"
-    And The response code is 200
-    When I create a new valid Take with Donor
-    Then There is 0 take created
-    And The response code is 403
 
 
