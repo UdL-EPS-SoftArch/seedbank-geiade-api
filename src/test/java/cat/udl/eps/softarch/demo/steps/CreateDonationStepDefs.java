@@ -101,7 +101,7 @@ public class CreateDonationStepDefs {
         take.setAmount(10);
         take.setLocation("Mollerussa");
         take.setDate(ZonedDateTime.now());
-        take.setBy(createValidPropagator());
+        take.setPropagator(createValidPropagator());
         return take;
     }
     private Propagator createValidPropagator() {

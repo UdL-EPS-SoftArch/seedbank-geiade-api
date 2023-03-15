@@ -90,7 +90,7 @@ public class CreateTakeStepDefs {
         take.setWeight(BigDecimal.TEN);
         take.setLocation(location);
         take.setDate(ZonedDateTime.now());
-        take.setBy(createValidPropagator());
+        take.setPropagator(createValidPropagator());
         return take;
     }
 
@@ -100,7 +100,7 @@ public class CreateTakeStepDefs {
         take.setAmount(10);
         take.setLocation(location);
         take.setDate(ZonedDateTime.now());
-        take.setBy(createValidPropagator());
+        take.setPropagator(createValidPropagator());
         return take;
     }
     private Propagator createValidPropagator() {
