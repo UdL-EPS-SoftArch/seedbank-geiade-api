@@ -20,7 +20,7 @@ Feature: Create Request
     When I create a new request without Take with propagator with username "propagator"
     Then The response code is 201
 
-  Scenario: Create a new Request
+  Scenario: Create a new Request with a Take already associated to an other Request
     Given I login as "propagator" with password "password"
     When I create a new request with propagator with username "propagator"
     Then The response code is 201
