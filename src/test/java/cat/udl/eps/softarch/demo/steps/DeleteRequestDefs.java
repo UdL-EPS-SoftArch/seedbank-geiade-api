@@ -18,7 +18,7 @@ public class DeleteRequestDefs {
     private StepDefs stepDefs;
     @Autowired
     private RequestRepository requestRepository;
-    @Given("^There is a Request created with Id \"([^\"]*)\"$")
+    @Given("^There is a Request created with id \"([^\"]*)\"$")
     public void thereIsARequestCreatedWithId(Long id) throws RuntimeException {
         if (!requestRepository.existsById(id)) {
             throw new RuntimeException("Unexisting Request");
