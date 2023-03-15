@@ -55,3 +55,10 @@ Feature: Register Propagator
     Then The response code is 400
     And The error message is "length must be between 8 and 256"
     And It has not been created a propagator with username "propagator4"
+
+  Scenario: Register new propagator with an existing email
+    Given There is a registered propagator with username "propagator" and password "password" and email "propagator@sample.app"
+    And I'm not logged in
+    When I register a new propagator with username "propagator5", email "propagator@sample.app" and password "password2"
+    Then The response code is 409
+    And I can login with username "propagator" and password "password"
