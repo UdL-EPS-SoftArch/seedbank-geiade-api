@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -18,16 +20,18 @@ import java.time.ZonedDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Batch {
-    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private Long id;
+    @Id
+    private long id;
+
     @NotNull
-    @Min(value = 1, message = "There must be one or more seeds")
+    @Min(value = 1, message = "The minimal amount of a batch should be one")
     private Integer amount;
 
     @NotNull
-    @Positive(message = "Weight must be more than 0")
+    @DecimalMin(value = "0", message = "Minim weight should be 0")
+
     private BigDecimal weight;
 
     @NotBlank
@@ -36,7 +40,4 @@ public class Batch {
 
     private ZonedDateTime date = ZonedDateTime.now();
 
-    /*
-    private List<Seed> seeds;
-    */
 }
