@@ -7,9 +7,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.Optional;
 
-import java.util.List;
-import java.util.Optional;
-
 @RepositoryRestResource
 public interface TakeRepository extends PagingAndSortingRepository<Take, Long> {
     Optional<Take> findByLocation(String location);
