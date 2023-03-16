@@ -30,6 +30,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
                     .antMatchers(HttpMethod.GET, "/identity").authenticated()
                     .antMatchers(HttpMethod.POST, "/users").anonymous()
                     .antMatchers(HttpMethod.POST, "/users/*").denyAll()
+                    .antMatchers(HttpMethod.POST, "/propagators").anonymous()
+                    .antMatchers(HttpMethod.POST, "/propagators/*").denyAll()
                     .antMatchers(HttpMethod.POST, "/admins").anonymous()
                     .antMatchers(HttpMethod.POST, "/admins/*").denyAll()
                     .antMatchers(HttpMethod.POST, "/donors").anonymous()
