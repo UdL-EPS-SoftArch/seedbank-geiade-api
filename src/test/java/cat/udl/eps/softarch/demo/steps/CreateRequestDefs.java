@@ -56,10 +56,10 @@ public class CreateRequestDefs {
         request.setWeight(BigDecimal.ONE);
         request.setLocation("Lleida");
         request.setLastUpdate(ZonedDateTime.now());
-        request.setFulfilledBy(createValidTake("Lleida"));
+        request.setFulfilledBy(createValidTake("Lleida",propagator));
         return request;
     }
-    private Take createValidTake(String location) throws Exception{
+    private Take createValidTake(String location, Propagator propagator) throws Exception{
         Optional<Take> take1 = takeRepository.findByLocation(location);
         if (take1.isEmpty()){
             Take take = new Take();
@@ -67,18 +67,14 @@ public class CreateRequestDefs {
             take.setAmount(10);
             take.setLocation(location);
             take.setDate(ZonedDateTime.now());
+            take.setBy(propagator);
             takeRepository.save(take);
             return take;
         }
         return take1.get();
     }
     private Propagator createValidPropagator() {
-        Propagator propagator = new Propagator();
-        propagator.setUsername("propagator");
-        propagator.setEmail("propagator@sample.app");
-        propagator.setPassword("password");
-        propagator.encodePassword();
-        return propagator;
+        return propagatorRepository.findById("propagator").get();
     }
 
     private List<String> getLocations() {
