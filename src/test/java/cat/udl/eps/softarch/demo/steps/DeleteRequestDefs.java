@@ -1,16 +1,12 @@
 package cat.udl.eps.softarch.demo.steps;
 
-import cat.udl.eps.softarch.demo.domain.Request;
-import cat.udl.eps.softarch.demo.repository.PropagatorRepository;
 import cat.udl.eps.softarch.demo.repository.RequestRepository;
-import cat.udl.eps.softarch.demo.repository.TakeRepository;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 public class DeleteRequestDefs {
