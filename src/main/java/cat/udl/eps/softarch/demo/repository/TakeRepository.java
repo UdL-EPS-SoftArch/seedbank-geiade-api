@@ -9,5 +9,5 @@ import java.util.List;
 
 @RepositoryRestResource
 public interface TakeRepository extends PagingAndSortingRepository<Take, Long> {
-        List<Take> findByPropagator(Propagator propagator);
+        List<Take> findByBy(Propagator propagator);
 }

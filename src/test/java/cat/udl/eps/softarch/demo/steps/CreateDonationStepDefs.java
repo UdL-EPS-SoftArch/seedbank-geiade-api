@@ -5,6 +5,8 @@ import cat.udl.eps.softarch.demo.domain.Donor;
 import cat.udl.eps.softarch.demo.domain.Propagator;
 import cat.udl.eps.softarch.demo.domain.Take;
 import cat.udl.eps.softarch.demo.repository.DonorRepository;
+import cat.udl.eps.softarch.demo.repository.PropagatorRepository;
+import cat.udl.eps.softarch.demo.repository.TakeRepository;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,12 @@ public class CreateDonationStepDefs {
     private StepDefs stepDefs;
     @Autowired
     private DonorRepository donorRepository;
+
+    @Autowired
+    private TakeRepository takeRepository;
+
+    @Autowired
+    private PropagatorRepository propagatorRepository;
     
     @Given("^There is a registered donor with username \"([^\"]*)\"$")
     public void thereIsARegisteredDonorWithUsername(String username) throws RuntimeException {
@@ -81,7 +89,6 @@ public class CreateDonationStepDefs {
                 .andDo(print());
     }
 
-
     private Donation createValidDonation() {
         Donation donation = new Donation();
         donation.setAmount(89);
@@ -114,16 +121,11 @@ public class CreateDonationStepDefs {
         take.setAmount(10);
         take.setLocation("Mollerussa");
         take.setDate(ZonedDateTime.now());
-        take.setPropagator(createValidPropagator());
-        return take;
+        take.setBy(createValidPropagator());
+        return takeRepository.save(take);
     }
     private Propagator createValidPropagator() {
-        Propagator propagator = new Propagator();
-        propagator.setUsername("propagator");
-        propagator.setEmail("propagator@sample.app");
-        propagator.setPassword("password");
-        propagator.encodePassword();
-        return propagator;
+        return propagatorRepository.findById("propagator").get();
     }
     private Donation createValidDonationWithDonorAndTake() {
         Donation donation = new Donation();
