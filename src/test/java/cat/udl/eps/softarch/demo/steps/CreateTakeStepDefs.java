@@ -36,7 +36,6 @@ public class CreateTakeStepDefs {
                 .andDo(print());
     }
 
-
     @Then("There is 1 take created$")
     public void thereIsOnetakeCreated() throws Exception {
         Assert.assertEquals(1, takeRepository.count());
@@ -58,12 +57,39 @@ public class CreateTakeStepDefs {
         }
     }
 
+    @When("I create an invalid take")
+    public void CreateAnInvalidTake() throws Exception{
+        Take take = createInvalidTake("Brno");
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        post("/takes")
+                                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                .characterEncoding("utf-8")
+                                .content(stepDefs.mapper.writeValueAsString(take))
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
+    }
+
     @Then("There are 5 take created$")
     public void thereAreFiveTakeCreated() throws Exception {
         Assert.assertEquals(5, takeRepository.count());
     }
+    @Then("There is 0 take created$")
+    public void thereIsNoTakeCreated() {
+        Assert.assertEquals(0, takeRepository.count());
+    }
 
-    private Take createValidTake(String location) {
+
+    private Take createInvalidTake(String location){
+        Take take = new Take();
+        take.setWeight(BigDecimal.TEN);
+        take.setLocation(location);
+        take.setDate(ZonedDateTime.now());
+        take.setBy(createValidPropagator());
+        return take;
+    }
+
+    private Take createValidTake(String location){
         Take take = new Take();
         take.setWeight(BigDecimal.TEN);
         take.setAmount(10);
@@ -93,3 +119,5 @@ public class CreateTakeStepDefs {
         return locations;
     }
 }
+
+

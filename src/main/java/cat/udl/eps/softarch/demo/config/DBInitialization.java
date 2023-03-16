@@ -51,6 +51,17 @@ public class DBInitialization {
             user.encodePassword();
             userRepository.save(user);
         }
+
+        // Default donor
+        if (!donorRepository.existsById("userdonor")) {
+            Donor donor = new Donor();
+            donor.setEmail("userdonor@sample.app");
+            donor.setUsername("userdonor");
+            donor.setPassword(defaultPassword);
+            donor.encodePassword();
+            donorRepository.save(donor);
+        }
+
         if (Arrays.asList(activeProfiles.split(",")).contains("test")) {
             // Testing instances
             if (!userRepository.existsById("test")) {
