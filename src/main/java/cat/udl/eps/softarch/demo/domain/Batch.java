@@ -19,11 +19,11 @@ import java.time.ZonedDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Batch {
+public class Batch extends UriEntity<Long>{
     @GeneratedValue(strategy = GenerationType.AUTO)
 
     @Id
-    private long id;
+    private Long id;
 
     @NotNull
     @Min(value = 1, message = "The minimal amount of a batch should be one")
