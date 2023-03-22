@@ -9,6 +9,7 @@ import org.springframework.data.rest.core.annotation.*;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+
 @Component
 @RepositoryEventHandler
 public class RequestEventHandler {
@@ -23,10 +24,11 @@ public class RequestEventHandler {
     @HandleBeforeCreate
     public void handleRequestPreCreate(Request request) {
         logger.info("Before creating: {}", request.toString());
-        assert request.getFulfilledBy() != null;
-        Optional<Request> request1 = requestRepository.findByFulfilledBy(request.getFulfilledBy());
-        if(request1.isPresent()){
-            throw new ForbiddenException();
+        if (request.getFulfilledBy() != null) {
+            Optional<Request> request1 = requestRepository.findByFulfilledBy(request.getFulfilledBy());
+            if (request1.isPresent()) {
+                throw new ForbiddenException();
+            }
         }
     }
 }
