@@ -119,26 +119,6 @@ public class CreateTakeStepDefs {
         return take;
     }
 
-    private Take createValidTakeWithoutPropagator(String location) {
-        Take take = new Take();
-        take.setWeight(BigDecimal.TEN);
-        take.setAmount(10);
-        take.setLocation(location);
-        take.setDate(ZonedDateTime.now());
-        return take;
-    }
-    /*
-    private Take createValidTakeWithDonor(String location) {
-        Take take = new Take();
-        take.setWeight(BigDecimal.TEN);
-        take.setAmount(10);
-        take.setLocation(location);
-        take.setDate(ZonedDateTime.now());
-
-        return take;
-    }
-    */
-
     private Propagator createValidPropagator() {
        return propagatorRepository.findById("propagator").get();
     }
