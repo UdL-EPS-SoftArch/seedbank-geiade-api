@@ -2,7 +2,6 @@ package cat.udl.eps.softarch.demo.steps;
 
 import cat.udl.eps.softarch.demo.domain.Propagator;
 import cat.udl.eps.softarch.demo.domain.Take;
-import cat.udl.eps.softarch.demo.repository.PropagatorRepository;
 import cat.udl.eps.softarch.demo.repository.TakeRepository;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -20,8 +19,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 
 public class CreateTakeStepDefs {
     @Autowired
-    private PropagatorRepository propagatorRepository;
-    @Autowired
     private TakeRepository takeRepository;
     @Autowired
     private StepDefs stepDefs;
@@ -37,7 +34,6 @@ public class CreateTakeStepDefs {
                                 .accept(MediaType.APPLICATION_JSON)
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
-        //newResourceUri = stepDefs.result.andReturn().getResponse().getHeader("Location");
     }
 
     @Then("There is 1 take created$")
@@ -94,7 +90,6 @@ public class CreateTakeStepDefs {
     public void thereAreFiveTakeCreated() throws Exception {
         Assert.assertEquals(5, takeRepository.count());
     }
-
     @Then("There is 0 take created$")
     public void thereIsNoTakeCreated() {
         Assert.assertEquals(0, takeRepository.count());

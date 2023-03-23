@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @RepositoryRestResource
 public interface TakeRepository extends PagingAndSortingRepository<Take, Long> {
-        Optional<Take> findByLocation(String location);
-        List<Take> findByBy(Propagator propagator);
+    Optional<Take> findByLocation(String location);
+    List<Take> findByBy(Propagator propagator);
 }
