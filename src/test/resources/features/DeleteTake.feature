@@ -18,6 +18,6 @@ Feature: Delete Take
     When I delete a Take
     Then The response code is 204
     And I try to get the take
-    And The response code is 401
+    And The response code is 404
 
 
