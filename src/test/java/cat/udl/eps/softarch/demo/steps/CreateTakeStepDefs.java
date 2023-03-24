@@ -76,11 +76,7 @@ public class CreateTakeStepDefs {
 
     @When("I create a take without a Propagator")
     public void CreateATakeWithoutAPropagator() throws Exception {
-        Take take = new Take();
-        take.setWeight(BigDecimal.TEN);
-        take.setAmount(10);
-        take.setLocation("Brno");
-        take.setDate(ZonedDateTime.now());
+        Take take = createValidTakeWithoutPropagator("Brno");
         stepDefs.result = stepDefs.mockMvc.perform(
                         post("/takes")
                                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -116,6 +112,15 @@ public class CreateTakeStepDefs {
         take.setLocation(location);
         take.setDate(ZonedDateTime.now());
         take.setBy(createValidPropagator());
+        return take;
+    }
+
+    private Take createValidTakeWithoutPropagator(String location) {
+        Take take = new Take();
+        take.setWeight(BigDecimal.TEN);
+        take.setAmount(10);
+        take.setLocation(location);
+        take.setDate(ZonedDateTime.now());
         return take;
     }
 
