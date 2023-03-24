@@ -12,3 +12,9 @@ Feature: Delete Donation
     Then The response code is 204
     And I try to get the donation
     And The response code is 404
+
+  Scenario: Delete a Donation without authentication
+    Given I'm not logged in
+    And There is a donation created with amount 10, weight 5 and location "Lleida"
+    When I delete the donation
+    Then The response code is 401
