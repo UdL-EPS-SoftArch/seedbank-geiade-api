@@ -74,22 +74,6 @@ public class CreateTakeStepDefs {
                 .andDo(print());
     }
 
-
-    /*
-    @When("I create a new valid Take with Donor")
-    public void CreateANewValidTakeWithDonor() throws Exception {
-        Take take = createValidTakeWithDonor("Lleida");
-        stepDefs.result = stepDefs.mockMvc.perform(
-                        post("/takes")
-                                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                                .characterEncoding("utf-8")
-                                .content(stepDefs.mapper.writeValueAsString(take))
-                                .accept(MediaType.APPLICATION_JSON)
-                                .with(AuthenticationStepDefs.authenticate()))
-                .andDo(print());
-    }
-     */
-
     @Then("There are 5 take created$")
     public void thereAreFiveTakeCreated() throws Exception {
         Assert.assertEquals(5, takeRepository.count());
