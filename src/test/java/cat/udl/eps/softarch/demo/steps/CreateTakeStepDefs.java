@@ -74,6 +74,23 @@ public class CreateTakeStepDefs {
                 .andDo(print());
     }
 
+    @When("I create a take without a Propagator")
+    public void CreateATakeWithoutAPropagator() throws Exception {
+        Take take = new Take();
+        take.setWeight(BigDecimal.TEN);
+        take.setAmount(10);
+        take.setLocation("Brno");
+        take.setDate(ZonedDateTime.now());
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        post("/takes")
+                                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                .characterEncoding("utf-8")
+                                .content(stepDefs.mapper.writeValueAsString(take))
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
+    }
+
     @Then("There are 5 take created$")
     public void thereAreFiveTakeCreated() throws Exception {
         Assert.assertEquals(5, takeRepository.count());
