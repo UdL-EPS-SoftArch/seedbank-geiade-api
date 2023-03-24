@@ -8,10 +8,14 @@ import cat.udl.eps.softarch.demo.repository.PropagatorRepository;
 import cat.udl.eps.softarch.demo.repository.RequestRepository;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -53,5 +57,12 @@ public class DeleteDonationStepDefs {
                                 .accept(MediaType.APPLICATION_JSON)
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
+    }
+
+    @And("There is no donation created with id {long}")
+    public void thereIsNoDonationsCreatedWithId(Long id) {
+        Optional<Donation> donation = donationRepository.findById(id);
+        Assert.assertTrue(donation.isEmpty());
+        newResourceUri = "/donations/999";
     }
 }
