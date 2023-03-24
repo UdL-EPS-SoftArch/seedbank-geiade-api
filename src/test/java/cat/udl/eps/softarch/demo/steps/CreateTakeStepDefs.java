@@ -2,6 +2,7 @@ package cat.udl.eps.softarch.demo.steps;
 
 import cat.udl.eps.softarch.demo.domain.Propagator;
 import cat.udl.eps.softarch.demo.domain.Take;
+import cat.udl.eps.softarch.demo.repository.PropagatorRepository;
 import cat.udl.eps.softarch.demo.repository.TakeRepository;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -18,6 +19,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 public class CreateTakeStepDefs {
+
+    @Autowired
+    private PropagatorRepository propagatorRepository;
     @Autowired
     private TakeRepository takeRepository;
     @Autowired
@@ -25,7 +29,7 @@ public class CreateTakeStepDefs {
 
     @When("^I create a new valid Take with Propagator$")
     public void createTake() throws Exception {
-        Take take = createValidTake("Lleida");
+        Take take = createValidTakeWithPropagator("Lleida");
         stepDefs.result = stepDefs.mockMvc.perform(
                         post("/takes")
                                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -45,7 +49,7 @@ public class CreateTakeStepDefs {
     public void thereAreVariousTakesCreated() throws Exception {
         List<String> locations = getLocations();
         for (int i = 0; i < 5; i++) {
-            Take take = createValidTake(locations.get(i));
+            Take take = createValidTakeWithPropagator(locations.get(i));
             stepDefs.result = stepDefs.mockMvc.perform(
                             post("/takes")
                                     .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -58,8 +62,8 @@ public class CreateTakeStepDefs {
     }
 
     @When("I create an invalid take")
-    public void CreateAnInvalidTake() throws Exception{
-        Take take = createInvalidTake("Brno");
+    public void CreateAnInvalidTake() throws Exception {
+        Take take = createTakeMissingSomeAttributes("Brno");
         stepDefs.result = stepDefs.mockMvc.perform(
                         post("/takes")
                                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -70,6 +74,22 @@ public class CreateTakeStepDefs {
                 .andDo(print());
     }
 
+
+    /*
+    @When("I create a new valid Take with Donor")
+    public void CreateANewValidTakeWithDonor() throws Exception {
+        Take take = createValidTakeWithDonor("Lleida");
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        post("/takes")
+                                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                .characterEncoding("utf-8")
+                                .content(stepDefs.mapper.writeValueAsString(take))
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
+    }
+     */
+
     @Then("There are 5 take created$")
     public void thereAreFiveTakeCreated() throws Exception {
         Assert.assertEquals(5, takeRepository.count());
@@ -79,8 +99,7 @@ public class CreateTakeStepDefs {
         Assert.assertEquals(0, takeRepository.count());
     }
 
-
-    private Take createInvalidTake(String location){
+    private Take createTakeMissingSomeAttributes(String location) {
         Take take = new Take();
         take.setWeight(BigDecimal.TEN);
         take.setLocation(location);
@@ -89,7 +108,7 @@ public class CreateTakeStepDefs {
         return take;
     }
 
-    private Take createValidTake(String location){
+    private Take createValidTakeWithPropagator(String location) {
         Take take = new Take();
         take.setWeight(BigDecimal.TEN);
         take.setAmount(10);
@@ -100,12 +119,7 @@ public class CreateTakeStepDefs {
     }
 
     private Propagator createValidPropagator() {
-        Propagator propagator = new Propagator();
-        propagator.setUsername("propagator");
-        propagator.setEmail("propagator@sample.app");
-        propagator.setPassword("password");
-        propagator.encodePassword();
-        return propagator;
+       return propagatorRepository.findById("propagator").get();
     }
 
     private List<String> getLocations() {
@@ -119,5 +133,6 @@ public class CreateTakeStepDefs {
         return locations;
     }
 }
+
 
 
