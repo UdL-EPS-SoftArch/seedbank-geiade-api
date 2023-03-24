@@ -9,5 +9,5 @@ import java.util.List;
 
 @RepositoryRestResource
 public interface DonationRepository extends PagingAndSortingRepository<Donation, Long> {
-    List<Donor> findByBy(Donor by);
+    List<Donation> findByBy(Donor by);
 }
