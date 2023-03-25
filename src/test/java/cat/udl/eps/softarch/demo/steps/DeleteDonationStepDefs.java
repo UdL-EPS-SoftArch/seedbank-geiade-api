@@ -63,6 +63,6 @@ public class DeleteDonationStepDefs {
     public void thereIsNoDonationsCreatedWithId(Long id) {
         Optional<Donation> donation = donationRepository.findById(id);
         Assert.assertTrue(donation.isEmpty());
-        newResourceUri = "/donations/999";
+        newResourceUri = "/donations/" + id;
     }
 }
