@@ -19,6 +19,6 @@ Feature: Get a Take
 
   Scenario: Get a Take that doesn't exist
     Given I login as "propagator" with password "password"
-    And There is no take created with id 999G
+    And There is no take created with id 999
     And I try to get the take
     Then The response code is 404
