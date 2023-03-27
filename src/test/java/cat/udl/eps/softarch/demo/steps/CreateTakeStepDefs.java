@@ -74,11 +74,9 @@ public class CreateTakeStepDefs {
                 .andDo(print());
     }
 
-
-    /*
-    @When("I create a new valid Take with Donor")
-    public void CreateANewValidTakeWithDonor() throws Exception {
-        Take take = createValidTakeWithDonor("Lleida");
+    @When("I create a take without a Propagator")
+    public void CreateATakeWithoutAPropagator() throws Exception {
+        Take take = createValidTakeWithoutPropagator("Brno");
         stepDefs.result = stepDefs.mockMvc.perform(
                         post("/takes")
                                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -88,7 +86,6 @@ public class CreateTakeStepDefs {
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
     }
-     */
 
     @Then("There are 5 take created$")
     public void thereAreFiveTakeCreated() throws Exception {
@@ -115,6 +112,15 @@ public class CreateTakeStepDefs {
         take.setLocation(location);
         take.setDate(ZonedDateTime.now());
         take.setBy(createValidPropagator());
+        return take;
+    }
+
+    private Take createValidTakeWithoutPropagator(String location) {
+        Take take = new Take();
+        take.setWeight(BigDecimal.TEN);
+        take.setAmount(10);
+        take.setLocation(location);
+        take.setDate(ZonedDateTime.now());
         return take;
     }
 
