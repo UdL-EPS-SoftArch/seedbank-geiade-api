@@ -40,16 +40,6 @@ public class DBInitialization {
     @PostConstruct
     public void initializeDatabase() {
 
-        // Default propagator
-        if (!propagatorRepository.existsById("propagator")) {
-            Propagator propagator = new Propagator();
-            propagator.setEmail("propagator@sample.app");
-            propagator.setUsername("propagator");
-            propagator.setPassword(defaultPassword);
-            propagator.encodePassword();
-            propagatorRepository.save(propagator);
-        }
-
         // Default user
         if (!userRepository.existsById("demo")) {
             User user = new User();
@@ -60,25 +50,6 @@ public class DBInitialization {
             userRepository.save(user);
         }
 
-        // Default donor
-        if (!donorRepository.existsById("userdonor")) {
-            Donor donor = new Donor();
-            donor.setEmail("userdonor@sample.app");
-            donor.setUsername("userdonor");
-            donor.setPassword(defaultPassword);
-            donor.encodePassword();
-            donorRepository.save(donor);
-        }
-
-        //Default donation
-        Donation donation = new Donation();
-        donation.setAmount(89);
-        donation.setWeight(new BigDecimal("11.34"));
-        donation.setDate(ZonedDateTime.now());
-        donation.setLocation("Lleida");
-        donation.setBy(donorRepository.findById("userdonor").get());
-        donationRepository.save(donation);
-
         if (Arrays.asList(activeProfiles.split(",")).contains("test")) {
             // Testing instances
             if (!userRepository.existsById("test")) {
@@ -88,6 +59,36 @@ public class DBInitialization {
                 user.setPassword(defaultPassword);
                 user.encodePassword();
                 userRepository.save(user);
+            }
+
+            // Default donor
+            if (!donorRepository.existsById("userdonor")) {
+                Donor donor = new Donor();
+                donor.setEmail("userdonor@sample.app");
+                donor.setUsername("userdonor");
+                donor.setPassword(defaultPassword);
+                donor.encodePassword();
+                donorRepository.save(donor);
+            }
+
+            //Default donation
+            Donation donation = new Donation();
+            donation.setAmount(89);
+            donation.setWeight(new BigDecimal("11.34"));
+            donation.setDate(ZonedDateTime.now());
+            donation.setLocation("Lleida");
+            donation.setBy(donorRepository.findById("userdonor").get());
+            donationRepository.save(donation);
+
+
+            // Default propagator
+            if (!propagatorRepository.existsById("propagator")) {
+                Propagator propagator = new Propagator();
+                propagator.setEmail("propagator@sample.app");
+                propagator.setUsername("propagator");
+                propagator.setPassword(defaultPassword);
+                propagator.encodePassword();
+                propagatorRepository.save(propagator);
             }
         }
     }
