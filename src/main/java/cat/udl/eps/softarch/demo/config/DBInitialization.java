@@ -103,9 +103,9 @@ public class DBInitialization {
             take.setWeight(new BigDecimal("8.31"));
             take.setDate(ZonedDateTime.now());
             take.setLocation("Els Alamús");
-            take.setBy(propagatorRepository.findById("userpropagator").get());
+            take.setBy(propagatorRepository.findById("propagator").get());
             takeRepository.save(take);
-            //Default request
+
 
             // Default propagator
             if (!propagatorRepository.existsById("propagator")) {
