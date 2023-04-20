@@ -1,12 +1,6 @@
 package cat.udl.eps.softarch.demo.config;
-import cat.udl.eps.softarch.demo.domain.Donation;
-import cat.udl.eps.softarch.demo.domain.Donor;
-import cat.udl.eps.softarch.demo.domain.Propagator;
-import cat.udl.eps.softarch.demo.domain.User;
-import cat.udl.eps.softarch.demo.repository.DonationRepository;
-import cat.udl.eps.softarch.demo.repository.DonorRepository;
-import cat.udl.eps.softarch.demo.repository.PropagatorRepository;
-import cat.udl.eps.softarch.demo.repository.UserRepository;
+import cat.udl.eps.softarch.demo.domain.*;
+import cat.udl.eps.softarch.demo.repository.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import javax.annotation.PostConstruct;
@@ -27,14 +21,16 @@ public class DBInitialization {
     private final PropagatorRepository propagatorRepository;
 
     private final DonationRepository donationRepository;
+    private final RequestRepository requestRepository;
 
     public DBInitialization(UserRepository userRepository, DonorRepository donorRepository, PropagatorRepository propagatorRepository,
-                            DonationRepository donationRepository) {
+                            DonationRepository donationRepository, RequestRepository requestRepository) {
 
         this.userRepository = userRepository;
         this.donorRepository = donorRepository;
         this.propagatorRepository = propagatorRepository;
         this.donationRepository = donationRepository;
+        this.requestRepository = requestRepository;
     }
 
     @PostConstruct
@@ -110,6 +106,14 @@ public class DBInitialization {
                 propagator.encodePassword();
                 propagatorRepository.save(propagator);
             }
+
+            Request request = new Request();
+            request.setAmount(3);
+            request.setWeight(new BigDecimal(32.0));
+            request.setDate(ZonedDateTime.now());
+            request.setLocation("Granada");
+            request.setBy(propagatorRepository.findById("propagator").get());
+            requestRepository.save(request);
         }
     }
 }
