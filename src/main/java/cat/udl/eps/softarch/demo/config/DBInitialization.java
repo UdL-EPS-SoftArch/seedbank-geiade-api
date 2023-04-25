@@ -24,14 +24,17 @@ public class DBInitialization {
 
     private final TakeRepository takeRepository;
 
+    private final RequestRepository requestRepository;
+
     public DBInitialization(UserRepository userRepository, DonorRepository donorRepository, PropagatorRepository propagatorRepository,
-                            DonationRepository donationRepository, TakeRepository takeRepository) {
+                            DonationRepository donationRepository, TakeRepository takeRepository, RequestRepository requestRepository) {
 
         this.userRepository = userRepository;
         this.donorRepository = donorRepository;
         this.propagatorRepository = propagatorRepository;
         this.donationRepository = donationRepository;
         this.takeRepository = takeRepository;
+        this.requestRepository = requestRepository;
     }
 
     @PostConstruct
@@ -106,6 +109,14 @@ public class DBInitialization {
             take.setBy(propagatorRepository.findById("propagator").get());
             takeRepository.save(take);
 
+            //Default request
+            Request request = new Request();
+            request.setAmount(3);
+            request.setWeight(new BigDecimal(32.0));
+            request.setDate(ZonedDateTime.now());
+            request.setLocation("Granada");
+            request.setBy(propagatorRepository.findById("propagator").get());
+            requestRepository.save(request);
 
             // Default propagator
             if (!propagatorRepository.existsById("propagator")) {
