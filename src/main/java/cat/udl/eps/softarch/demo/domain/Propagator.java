@@ -19,6 +19,6 @@ public class Propagator extends User {
     @JsonValue(value = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_PROPAGATOR");
+        return AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
     }
 }
