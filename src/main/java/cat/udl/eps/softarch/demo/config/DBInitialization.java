@@ -23,13 +23,16 @@ public class DBInitialization {
     private final DonationRepository donationRepository;
     private final RequestRepository requestRepository;
 
+    private final TakeRepository takeRepository;
+
     public DBInitialization(UserRepository userRepository, DonorRepository donorRepository, PropagatorRepository propagatorRepository,
-                            DonationRepository donationRepository, RequestRepository requestRepository) {
+                            DonationRepository donationRepository, TakeRepository takeRepository, RequestRepository requestRepository) {
 
         this.userRepository = userRepository;
         this.donorRepository = donorRepository;
         this.propagatorRepository = propagatorRepository;
         this.donationRepository = donationRepository;
+        this.takeRepository = takeRepository;
         this.requestRepository = requestRepository;
     }
 
@@ -96,6 +99,23 @@ public class DBInitialization {
             donation.setBy(donorRepository.findById("userdonor").get());
             donationRepository.save(donation);
 
+            //Default take
+            Take take = new Take();
+            take.setAmount(30);
+            take.setWeight(new BigDecimal("8.31"));
+            take.setDate(ZonedDateTime.now());
+            take.setLocation("Els Alamús");
+            take.setBy(propagatorRepository.findById("propagator").get());
+            takeRepository.save(take);
+
+            //Default request
+            Request request = new Request();
+            request.setAmount(3);
+            request.setWeight(new BigDecimal(32.0));
+            request.setDate(ZonedDateTime.now());
+            request.setLocation("Granada");
+            request.setBy(propagatorRepository.findById("propagator").get());
+            requestRepository.save(request);
 
             // Default propagator
             if (!propagatorRepository.existsById("propagator")) {
@@ -106,14 +126,6 @@ public class DBInitialization {
                 propagator.encodePassword();
                 propagatorRepository.save(propagator);
             }
-
-            Request request = new Request();
-            request.setAmount(3);
-            request.setWeight(new BigDecimal(32.0));
-            request.setDate(ZonedDateTime.now());
-            request.setLocation("Granada");
-            request.setBy(propagatorRepository.findById("propagator").get());
-            requestRepository.save(request);
         }
     }
 }
